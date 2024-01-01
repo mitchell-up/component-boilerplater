@@ -1,0 +1,17 @@
+{
+    "name": "auto-generate",
+    "version": "1.0.0",
+    "description": "Generating component, test, stories, and index files automatically.",
+    "main": "index.ts",
+    "scripts": {
+        "compile": "tsc",
+        "generate": "node dist/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "commander": "^11.1.0",
+        "fs-extra": "^11.2.0"
+    }
+}
