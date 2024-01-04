@@ -1,6 +1,13 @@
 import { Command } from 'commander'
 import fs from 'fs-extra'
-import { FileContents, index, makeFileObj } from './fileContents'
+import {
+    FileContents,
+    component,
+    index,
+    makeFileObj,
+    stories,
+    test,
+} from './fileContents'
 import path from 'path'
 
 const OUTPUT_BASE_DIR = path.join(__dirname, '../../src/components')
@@ -11,6 +18,21 @@ function createComponent(componentName: string) {
 
     const files: FileContents = [
         makeFileObj(componentDir, 'index.ts', index(componentName)),
+        makeFileObj(
+            componentDir,
+            `${componentName}.tsx`,
+            component(componentName),
+        ),
+        makeFileObj(
+            componentDir,
+            `${componentName}.test.tsx`,
+            test(componentName),
+        ),
+        makeFileObj(
+            componentDir,
+            `${componentName}.stories.tsx`,
+            stories(componentName),
+        ),
     ]
 
     // Generate Files for the component
