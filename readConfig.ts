@@ -1,13 +1,24 @@
 import fs from 'fs-extra'
+import path from 'path'
 
-const config = 'boilerplate.config.json';
+function findConfigFile(fileName: string, rootDir = process.cwd()) {
+  const filePath = path.join(rootDir, fileName)
 
-export function readConfig() {
-  fs.readFile(config, 'utf8', (err, data) => {
-    const config = JSON.parse(data);
+  if (!fs.existsSync(filePath)) {
+    throw Error('No exist file path.')
+  }
   
-    // config 데이터 사용 예시
-    console.log('사용자 이름:', config.baseDir);
-    console.log('사용자 이메일:', config.ext);
-  });
+  return filePath
+}
+
+export function readConfig(fileName: string) {
+  const configFile = findConfigFile(fileName);  
+
+  const configString = fs.readFileSync(configFile, 'utf8')
+
+  if (!configString) {
+    throw Error(`Failed to read '${fileName}'`)
+  }
+
+  return JSON.parse(configString)
 }
