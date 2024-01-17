@@ -6,6 +6,7 @@ import {
   test,
 } from './fileContents'
 import path from 'path'
+import { Config } from './readConfig'
 
 interface FileObj {
     path: fs.PathOrFileDescriptor
@@ -25,10 +26,15 @@ function makeFileObj(
     }
 }
 
-const OUTPUT_BASE_DIR = path.join(__dirname, '../../src/components')
+function makeOutputDir(basePath: string = '/') {
+  const cwd = process.cwd()
+  return path.join(cwd, basePath)
+}
 
-export function generateBoilerPlate(componentName: string) {
-    const componentDir = `${OUTPUT_BASE_DIR}/${componentName}`
+export function generateBoilerPlate(componentName: string, configs: Config) {
+    const outputDir = makeOutputDir(configs.baseDir)
+  
+    const componentDir = `${outputDir}/${componentName}`
 
     fs.ensureDirSync(componentDir)
 
@@ -61,8 +67,8 @@ export function generateBoilerPlate(componentName: string) {
     })
 
     // Add Component into index.ts
-    const indexPath = OUTPUT_BASE_DIR + '/index.ts'
-    const indexFile = fs.readFileSync(OUTPUT_BASE_DIR + '/index.ts')
+    const indexPath = outputDir + '/index.ts'
+    const indexFile = fs.readFileSync(outputDir + '/index.ts')
     fs.writeFileSync(indexPath, indexFile + index(componentName) + '\n')
 
     console.log(`✅ All '${componentName}' boilerplates has been generated.`)

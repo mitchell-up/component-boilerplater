@@ -1,6 +1,11 @@
 import fs from 'fs-extra'
 import path from 'path'
 
+export interface Config {
+  baseDir?: string
+  ext?: 'js' | 'ts'
+}
+
 function findConfigFile(fileName: string, rootDir = process.cwd()) {
   const filePath = path.join(rootDir, fileName)
 
@@ -20,5 +25,5 @@ export function readConfig(fileName: string) {
     throw Error(`Failed to read '${fileName}'`)
   }
 
-  return JSON.parse(configString)
+  return JSON.parse(configString) as Config
 }

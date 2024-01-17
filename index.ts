@@ -11,8 +11,8 @@ program
     .action((componentName) => {
         const configs = readConfig(CONFIG_FILENAME)
         console.log('💡', configs);
-        
-        //generateBoilerPlate(componentName)
+
+        generateBoilerPlate(componentName, configs)
     })
 
 program.parse(process.argv)
