@@ -1,29 +1,24 @@
 import fs from 'fs-extra'
-import {
-  component,
-  index,
-  stories,
-  test,
-} from './fileContents'
+import { component, index, stories, test } from './fileContents'
 import path from 'path'
 import { Config } from './readConfig'
 
 interface FileObj {
-    path: fs.PathOrFileDescriptor
-    contents: string
+  path: fs.PathOrFileDescriptor
+  contents: string
 }
 
 type FileContents = FileObj[]
 
 function makeFileObj(
-    componentDir: string,
-    fileName: string,
-    contents: string,
+  componentDir: string,
+  fileName: string,
+  contents: string,
 ): FileObj {
-    return {
-        path: `${componentDir}/${fileName}`,
-        contents: contents,
-    }
+  return {
+    path: `${componentDir}/${fileName}`,
+    contents: contents,
+  }
 }
 
 function makeOutputDir(basePath: string = '/') {
@@ -32,44 +27,32 @@ function makeOutputDir(basePath: string = '/') {
 }
 
 export function generateBoilerPlate(componentName: string, configs: Config) {
-    const outputDir = makeOutputDir(configs.baseDir)
-  
-    const componentDir = `${outputDir}/${componentName}`
+  const outputDir = makeOutputDir(configs.baseDir)
 
-    fs.ensureDirSync(componentDir)
+  const componentDir = `${outputDir}/${componentName}`
 
-    const files: FileContents = [
-        makeFileObj(
-          componentDir, 
-          'index.ts', 
-          index(componentName)
-        ),
-        makeFileObj(
-            componentDir,
-            `${componentName}.tsx`,
-            component(componentName),
-        ),
-        makeFileObj(
-            componentDir,
-            `${componentName}.test.tsx`,
-            test(componentName),
-        ),
-        makeFileObj(
-            componentDir,
-            `${componentName}.stories.tsx`,
-            stories(componentName),
-        ),
-    ]
+  fs.ensureDirSync(componentDir)
 
-    // Generate Files for the component
-    files.forEach((file) => {
-        fs.writeFileSync(file.path, file.contents)
-    })
+  const files: FileContents = [
+    makeFileObj(componentDir, 'index.ts', index(componentName)),
+    makeFileObj(componentDir, `${componentName}.tsx`, component(componentName)),
+    makeFileObj(componentDir, `${componentName}.test.tsx`, test(componentName)),
+    makeFileObj(
+      componentDir,
+      `${componentName}.stories.tsx`,
+      stories(componentName),
+    ),
+  ]
 
-    // Add Component into index.ts
-    const indexPath = outputDir + '/index.ts'
-    const indexFile = fs.readFileSync(outputDir + '/index.ts')
-    fs.writeFileSync(indexPath, indexFile + index(componentName) + '\n')
+  // Generate Files for the component
+  files.forEach((file) => {
+    fs.writeFileSync(file.path, file.contents)
+  })
 
-    console.log(`✅ All '${componentName}' boilerplates has been generated.`)
+  // Add Component into index.ts
+  const indexPath = outputDir + '/index.ts'
+  const indexFile = fs.readFileSync(outputDir + '/index.ts')
+  fs.writeFileSync(indexPath, indexFile + index(componentName) + '\n')
+
+  console.log(`✅ All '${componentName}' boilerplates has been generated.`)
 }
