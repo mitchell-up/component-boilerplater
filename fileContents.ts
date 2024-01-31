@@ -1,9 +1,10 @@
 /**
- * index.ts
+ * index
  */
 export const index = (name: string) => `export * from './${name}'`
+
 /**
- * Component.tsx
+ * Component
  */
 export const component = (name: string) =>
     `export interface ${name}Props {
@@ -15,7 +16,7 @@ export default function ${name}({  }: ${name}Props) {
 }`
 
 /**
- * Component.test.tsx
+ * Component.test
  */
 export const test = (name: string) =>
     `import { render } from '@testing-library/react'
@@ -32,7 +33,7 @@ describe('<${name}/>', () => {
 })`
 
 /**
- * Component.stories.tsx
+ * Component.stories
  */
 export const stories = (name: string) =>
     `import { Meta, StoryObj } from '@storybook/react'

@@ -34,12 +34,20 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
   fs.ensureDirSync(componentDir)
 
   const files: FileContents = [
-    makeFileObj(componentDir, 'index.ts', index(componentName)),
-    makeFileObj(componentDir, `${componentName}.tsx`, component(componentName)),
-    makeFileObj(componentDir, `${componentName}.test.tsx`, test(componentName)),
+    makeFileObj(componentDir, `index.${configs.ext}`, index(componentName)),
     makeFileObj(
       componentDir,
-      `${componentName}.stories.tsx`,
+      `${componentName}.${configs.ext}x`,
+      component(componentName),
+    ),
+    makeFileObj(
+      componentDir,
+      `${componentName}.test.${configs.ext}x`,
+      test(componentName),
+    ),
+    makeFileObj(
+      componentDir,
+      `${componentName}.stories.${configs.ext}x`,
       stories(componentName),
     ),
   ]
