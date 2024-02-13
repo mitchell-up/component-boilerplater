@@ -1,4 +1,4 @@
 {
   "baseDir": "/src/components",
-  "ext": "js"
+  "ext": "ts"
 }

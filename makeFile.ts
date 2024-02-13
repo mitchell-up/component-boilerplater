@@ -1,5 +1,6 @@
 import fs from 'fs-extra'
-import { component, index, stories, test } from './fileContents'
+import * as TSContents from './fileContents'
+import * as JSContents from './jsContents'
 import path from 'path'
 import { Config } from './readConfig'
 
@@ -32,6 +33,9 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
   const componentDir = `${outputDir}/${componentName}`
 
   fs.ensureDirSync(componentDir)
+
+  const { index, component, test, stories } =
+    configs.ext === 'ts' ? TSContents : JSContents
 
   const files: FileContents = [
     makeFileObj(componentDir, `index.${configs.ext}`, index(componentName)),
