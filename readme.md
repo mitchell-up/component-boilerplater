@@ -1,35 +1,93 @@
-# 보일러플레이트 자동 생성기
+<h1 align="center">Component Boilerplater</h1>
+<h3 align="center">
+  Don't manually create files for React Component, one by one
+</h3>
+<h3 align="center">
+Just one command, you can get Component, Test, Stories automatically.
+</h3>
+<br/>
 
-코드를 실행하여 컴포넌트 제작 시 필요한 기본 파일과 코드들을 자동으로 생성해줍니다. 각 파일에는 필요한 package를 import하고 구현을 위한 아주 기본적인 코드들이 들어 있습니다.
+## 🚀 Getting Started
 
--   index.ts
--   Component.tsx
--   Component.test.tsx
--   Component.stories.tsx
+## Configurations
+Make `boilerplate.config.json` in your root directory.
+
+```js
+{
+  "baseDir": "/src/components", // Output directory
+  "ext": "ts"                   // js | ts
+}
+```
+
+## What Can You Get?
+You only need to prepare a component name for files. If you named some component 'Text', you can get below files in Text folder:
+
+```bash
+Text
+├── index.ts
+├── Text.tsx
+├── Text.test.tsx
+├── Text.stories.tsx
+```
 
  <br/>
 
-### 자동 생성하기
+## Preview the files
 
-RUI 프로젝트의 root 디렉토리에서 실행하세요. 이미 script에 작성되어 있습니다.
-**컴포넌트 명은 Pascal Case로 입력하세요.**
+### index.ts
 
-```
-npm run auto-generate <Component name>
-```
-
-<br/>
-
-### 컴파일하기
-
-코드를 js 파일로 트랜스파일링 합니다. 코드를 수정하고 코드 실행을 위해 반드시 실행하세요.
-
-```
-npm run compile
+```ts
+export * from './NAME_REPLACED'
 ```
 
-### 실행하기
+### Component
+
+```ts
+export interface NAME_REPLACEDProps {}
+
+export default function NAME_REPLACED({}: NAME_REPLACEDProps) {
+  return <div></div>
+}
+```
+
+### Test
+
+```ts
+import { render } from '@testing-library/react'
+import NAME_REPLACED, { NAME_REPLACEDProps } from './NAME_REPLACED'
+
+const renderNAME_REPLACED = (props?: NAME_REPLACEDProps) => {
+  return render(<NAME_REPLACED {...props}></NAME_REPLACED>)
+}
+
+describe('<NAME_REPLACED/>', () => {
+  test('정상적으로 렌더링 된다.', () => {})
+})
+```
+
+### Stories
+
+```ts
+import { Meta, StoryObj } from '@storybook/react'
+import NAME_REPLACED from './NAME_REPLACED'
+
+const meta: Meta<typeof NAME_REPLACED> = {
+  title: 'Components/NAME_REPLACED',
+  component: NAME_REPLACED,
+  tags: ['autodocs'],
+}
+
+export default meta
+
+type Story = StoryObj<typeof NAME_REPLACED>
+
+/**
+ * NAME_REPLACED
+ */
+export const NAME_REPLACEDDefault: Story = {
+  name: 'NAME_REPLACED',
+}
 
 ```
-npm run generate <Component name>
-```
+
+
