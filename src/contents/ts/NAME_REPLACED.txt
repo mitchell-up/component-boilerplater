@@ -1,0 +1,5 @@
+export interface NAME_REPLACEDProps {}
+
+export default function NAME_REPLACED({}: NAME_REPLACEDProps) {
+  return <div></div>
+}

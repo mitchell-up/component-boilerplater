@@ -1,0 +1,10 @@
+import { render } from '@testing-library/react'
+import NAME_REPLACED from './NAME_REPLACED'
+
+const renderNAME_REPLACED = (props) => {
+  return render(<NAME_REPLACED {...props}></NAME_REPLACED>)
+}
+
+describe('<NAME_REPLACED/>', () => {
+  test('정상적으로 렌더링 된다.', () => {})
+})

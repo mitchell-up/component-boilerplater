@@ -1,0 +1,19 @@
+import { Meta, StoryObj } from '@storybook/react'
+import NAME_REPLACED from './NAME_REPLACED'
+
+const meta: Meta<typeof NAME_REPLACED> = {
+  title: 'Components/NAME_REPLACED',
+  component: NAME_REPLACED,
+  tags: ['autodocs'],
+}
+
+export default meta
+
+type Story = StoryObj<typeof NAME_REPLACED>
+
+/**
+ * NAME_REPLACED
+ */
+export const NAME_REPLACEDDefault: Story = {
+  name: 'NAME_REPLACED',
+}
