@@ -1,13 +1,36 @@
-<h1 align="center">Component Boilerplater</h1>
+<h1 align="center">🗂️<br/>Component Boilerplater</h1>
 <h3 align="center">
   Don't manually create files for React Component, one by one
 </h3>
 <h3 align="center">
 Just one command, you can get Component, Test, Stories automatically.
 </h3>
+
+<br/>
+
 <br/>
 
 ## 🚀 Getting Started
+
+### 01. Add Scripts
+```js
+{
+  //..
+  "scripts": {
+    //..
+    "gen": "component-boilerplater"
+    //..
+  }
+  //..
+}
+```
+
+### 02. Run Command with Component Name
+```bash
+npm run gen <Component Name>
+```
+
+<br/>
 
 ## Configurations
 Make `boilerplate.config.json` in your root directory.
@@ -18,6 +41,8 @@ Make `boilerplate.config.json` in your root directory.
   "ext": "ts"                   // js | ts
 }
 ```
+
+<br/>
 
 ## What Can You Get?
 You only need to prepare a component name for files. If you named some component 'Text', you can get below files in Text folder:
@@ -32,20 +57,20 @@ Text
 
  <br/>
 
-## Preview the files
+## Preview the files with component name 'Text'
 
 ### index.ts
 
 ```ts
-export * from './NAME_REPLACED'
+export * from './Text'
 ```
 
 ### Component
 
 ```ts
-export interface NAME_REPLACEDProps {}
+export interface TextProps {}
 
-export default function NAME_REPLACED({}: NAME_REPLACEDProps) {
+export default function Text({}: TextProps) {
   return <div></div>
 }
 ```
@@ -54,14 +79,14 @@ export default function NAME_REPLACED({}: NAME_REPLACEDProps) {
 
 ```ts
 import { render } from '@testing-library/react'
-import NAME_REPLACED, { NAME_REPLACEDProps } from './NAME_REPLACED'
+import Text, { TextProps } from './Text'
 
-const renderNAME_REPLACED = (props?: NAME_REPLACEDProps) => {
-  return render(<NAME_REPLACED {...props}></NAME_REPLACED>)
+const renderText = (props?: TextProps) => {
+  return render(<Text {...props}></Text>)
 }
 
-describe('<NAME_REPLACED/>', () => {
-  test('정상적으로 렌더링 된다.', () => {})
+describe('<Text/>', () => {
+  test('Renders correctly', () => {})
 })
 ```
 
@@ -69,25 +94,24 @@ describe('<NAME_REPLACED/>', () => {
 
 ```ts
 import { Meta, StoryObj } from '@storybook/react'
-import NAME_REPLACED from './NAME_REPLACED'
+import Text from './Text'
 
-const meta: Meta<typeof NAME_REPLACED> = {
-  title: 'Components/NAME_REPLACED',
-  component: NAME_REPLACED,
+const meta: Meta<typeof Text> = {
+  title: 'Components/Text',
+  component: Text,
   tags: ['autodocs'],
 }
 
 export default meta
 
-type Story = StoryObj<typeof NAME_REPLACED>
+type Story = StoryObj<typeof Text>
 
 /**
- * NAME_REPLACED
+ * Text
  */
-export const NAME_REPLACEDDefault: Story = {
-  name: 'NAME_REPLACED',
+export const TextDefault: Story = {
+  name: 'Text',
 }
-
 ```
 
 

@@ -6,5 +6,5 @@ const renderNAME_REPLACED = (props?: NAME_REPLACEDProps) => {
 }
 
 describe('<NAME_REPLACED/>', () => {
-  test('정상적으로 렌더링 된다.', () => {})
+  test('Renders correctly', () => {})
 })
