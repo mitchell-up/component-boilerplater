@@ -2,7 +2,7 @@
     "name": "component-boilerplater",
     "version": "1.0.0",
     "description": "Generating component, test, stories, and index files automatically.",
-    "main": "index.ts",
+    "main": "main.js",
     "scripts": {
         "compile": "tsc --build && cp -r src/contents dist/src/contents",
         "generate": "node dist/index.js",
@@ -10,14 +10,18 @@
         "start": "node index",
         "build": "npm run compile && cp package.json dist/package.json && cp -r bin dist/bin",
         "pack": "cd ./dist && npm pack",
-        "gen": "component-boilerplater"
+        "gen": "component-boilerplater",
+        "roll": "rollup -c --bundleConfigAsCjs && cp -r src/contents dist/contents && cp -r bin dist/bin"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@rollup/plugin-typescript": "^11.1.6",
         "@types/fs-extra": "^11.0.4",
         "commander": "^11.1.0",
         "fs-extra": "^11.2.0",
+        "rollup": "^4.14.0",
+        "tslib": "^2.6.2",
         "typescript": "^5.4.3"
     },
     "bin": {
