@@ -16,6 +16,8 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-typescript": "^11.1.6",
         "@types/fs-extra": "^11.0.4",
         "commander": "^11.1.0",
