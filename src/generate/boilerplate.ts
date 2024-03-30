@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { readFileSync } from 'fs-extra'
 import path from 'path'
 
 type BoilerPlateContents =
@@ -18,7 +18,7 @@ export function makeBoilerPlate(
   name: string,
   identifier = IDENTIFIER,
 ) {
-  const contents = fs.readFileSync(path, 'utf-8')
+  const contents = readFileSync(path, 'utf-8')
   return contents.replaceAll(identifier, name)
 }
 
@@ -27,6 +27,6 @@ export function getBoilerPlates(
   replaceName: string,
   ext: 'js' | 'ts' = 'ts',
 ) {
-  const contentsPath = path.join(__dirname, `../contents/${ext}/${fileName}`)
+  const contentsPath = path.join(`../contents/${ext}/${fileName}`)
   return makeBoilerPlate(contentsPath, replaceName)
 }
