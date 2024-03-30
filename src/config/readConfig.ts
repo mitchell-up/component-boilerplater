@@ -10,14 +10,15 @@ function findConfigFile(fileName: string, rootDir = process.cwd()) {
   const filePath = path.join(rootDir, fileName)
 
   if (!fs.existsSync(filePath)) {
-    throw Error('No exist file path.')
+    const errorMessage = `Failed to find config file. You need to make "${fileName}" in your root directory.`
+    throw Error(errorMessage)
   }
-  
+
   return filePath
 }
 
 export function readConfig(fileName: string) {
-  const configFile = findConfigFile(fileName);  
+  const configFile = findConfigFile(fileName)
 
   const configString = fs.readFileSync(configFile, 'utf8')
 
