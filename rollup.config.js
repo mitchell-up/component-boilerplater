@@ -11,6 +11,6 @@ export default [
       exports: 'named',
       sourcemap: true,
     },
-    plugins: [typescript()],
+    plugins: [commonjs(), resolve(), typescript()],
   },
 ]
