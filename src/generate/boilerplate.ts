@@ -27,6 +27,6 @@ export function getBoilerPlates(
   replaceName: string,
   ext: 'js' | 'ts' = 'ts',
 ) {
-  const contentsPath = path.join(`../contents/${ext}/${fileName}`)
+  const contentsPath = path.join(__dirname, 'contents', ext, fileName)
   return makeBoilerPlate(contentsPath, replaceName)
 }
