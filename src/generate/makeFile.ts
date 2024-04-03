@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 import { Config } from '../config/readConfig'
-import { getBoilerPlates } from './boilerplate'
+import { getBoilerPlate } from './boilerplate'
 
 interface FileObj {
   path: fs.PathOrFileDescriptor
@@ -37,17 +37,17 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
     makeFileObj(
       componentDir,
       `index.${configs.ext}`,
-      getBoilerPlates('index.txt', componentName, configs.ext || 'ts'),
+      getBoilerPlate('index.txt', componentName, configs.ext || 'ts'),
     ),
     makeFileObj(
       componentDir,
       `${componentName}.${configs.ext}x`,
-      getBoilerPlates('NAME_REPLACED.txt', componentName, configs.ext || 'ts'),
+      getBoilerPlate('NAME_REPLACED.txt', componentName, configs.ext || 'ts'),
     ),
     makeFileObj(
       componentDir,
       `${componentName}.test.${configs.ext}x`,
-      getBoilerPlates(
+      getBoilerPlate(
         'NAME_REPLACED.test.txt',
         componentName,
         configs.ext || 'ts',
@@ -56,7 +56,7 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
     makeFileObj(
       componentDir,
       `${componentName}.stories.${configs.ext}x`,
-      getBoilerPlates(
+      getBoilerPlate(
         'NAME_REPLACED.stories.txt',
         componentName,
         configs.ext || 'ts',
@@ -79,7 +79,7 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
     fs.writeFileSync(
       indexPath,
       indexFile +
-        getBoilerPlates('index.txt', componentName, configs.ext || 'ts') +
+        getBoilerPlate('index.txt', componentName, configs.ext || 'ts') +
         '\n',
     )
   } else {

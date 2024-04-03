@@ -22,7 +22,7 @@ export function makeBoilerPlate(
   return contents.replaceAll(identifier, name)
 }
 
-export function getBoilerPlates(
+export function getBoilerPlate(
   fileName: BoilerPlateContents,
   replaceName: string,
   ext: 'js' | 'ts' = 'ts',
