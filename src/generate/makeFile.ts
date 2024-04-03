@@ -68,6 +68,7 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
   files.forEach((file) => {
     fs.writeFileSync(file.path, file.contents)
   })
+
   console.log(`✅ All '${componentName}' boilerplates has been generated.`)
 
   // Add Component into index.ts
@@ -83,6 +84,11 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
         '\n',
     )
   } else {
-    console.log(`❌ Components index file doesn't exist.`)
+    console.log(`💡 The index file for Components has been generated.`)
+
+    fs.writeFileSync(
+      indexPath,
+      getBoilerPlate('index.txt', componentName, configs.ext || 'ts'),
+    )
   }
 }
