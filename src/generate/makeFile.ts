@@ -10,6 +10,11 @@ interface FileObj {
 
 type FileContents = FileObj[]
 
+function makeOutputDir(basePath: string = '/') {
+  const cwd = process.cwd()
+  return path.join(cwd, basePath)
+}
+
 function makeFileObj(
   componentDir: string,
   fileName: string,
@@ -21,48 +26,47 @@ function makeFileObj(
   }
 }
 
-function makeOutputDir(basePath: string = '/') {
-  const cwd = process.cwd()
-  return path.join(cwd, basePath)
+function getFileContents(
+  dir: string,
+  name: string,
+  config: Config,
+): FileContents {
+  return [
+    // index
+    makeFileObj(
+      dir,
+      `index.${config.ext}`,
+      getBoilerPlate('index.txt', name, config.ext),
+    ),
+    // Component
+    makeFileObj(
+      dir,
+      `${name}.${config.ext}x`,
+      getBoilerPlate('NAME_REPLACED.txt', name, config.ext),
+    ),
+    // Component.test
+    makeFileObj(
+      dir,
+      `${name}.test.${config.ext}x`,
+      getBoilerPlate('NAME_REPLACED.test.txt', name, config.ext),
+    ),
+    // Component.stories
+    makeFileObj(
+      dir,
+      `${name}.stories.${config.ext}x`,
+      getBoilerPlate('NAME_REPLACED.stories.txt', name, config.ext),
+    ),
+  ]
 }
 
-export function generateBoilerPlate(componentName: string, configs: Config) {
-  const outputDir = makeOutputDir(configs.baseDir)
+export function generateBoilerPlates(componentName: string, config: Config) {
+  const outputDir = makeOutputDir(config.baseDir)
 
   const componentDir = `${outputDir}/${componentName}`
 
   fs.ensureDirSync(componentDir)
 
-  const files: FileContents = [
-    makeFileObj(
-      componentDir,
-      `index.${configs.ext}`,
-      getBoilerPlate('index.txt', componentName, configs.ext || 'ts'),
-    ),
-    makeFileObj(
-      componentDir,
-      `${componentName}.${configs.ext}x`,
-      getBoilerPlate('NAME_REPLACED.txt', componentName, configs.ext || 'ts'),
-    ),
-    makeFileObj(
-      componentDir,
-      `${componentName}.test.${configs.ext}x`,
-      getBoilerPlate(
-        'NAME_REPLACED.test.txt',
-        componentName,
-        configs.ext || 'ts',
-      ),
-    ),
-    makeFileObj(
-      componentDir,
-      `${componentName}.stories.${configs.ext}x`,
-      getBoilerPlate(
-        'NAME_REPLACED.stories.txt',
-        componentName,
-        configs.ext || 'ts',
-      ),
-    ),
-  ]
+  const files = getFileContents(componentDir, componentName, config)
 
   // Generate Files for the component
   files.forEach((file) => {
@@ -72,23 +76,16 @@ export function generateBoilerPlate(componentName: string, configs: Config) {
   console.log(`✅ All '${componentName}' boilerplates has been generated.`)
 
   // Add Component into index.ts
-  const indexPath = outputDir + `/index.${configs.ext}`
+  const indexPath = outputDir + `/index.${config.ext}`
+  const indexContents = getBoilerPlate('index.txt', componentName, config.ext)
 
   if (fs.existsSync(indexPath)) {
-    const indexFile = fs.readFileSync(outputDir + `/index.${configs.ext}`)
+    const indexFile = fs.readFileSync(outputDir + `/index.${config.ext}`)
 
-    fs.writeFileSync(
-      indexPath,
-      indexFile +
-        getBoilerPlate('index.txt', componentName, configs.ext || 'ts') +
-        '\n',
-    )
+    fs.writeFileSync(indexPath, indexFile + indexContents + '\n')
   } else {
     console.log(`💡 The index file for Components has been generated.`)
 
-    fs.writeFileSync(
-      indexPath,
-      getBoilerPlate('index.txt', componentName, configs.ext || 'ts'),
-    )
+    fs.writeFileSync(indexPath, indexContents)
   }
 }

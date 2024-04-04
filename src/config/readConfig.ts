@@ -17,7 +17,7 @@ function findConfigFile(fileName: string, rootDir = process.cwd()) {
   return filePath
 }
 
-export function readConfig(fileName: string) {
+export function readConfig(fileName: string): Required<Config> {
   const configFile = findConfigFile(fileName)
 
   const configString = fs.readFileSync(configFile, 'utf8')
@@ -26,5 +26,10 @@ export function readConfig(fileName: string) {
     throw Error(`Failed to read '${fileName}'`)
   }
 
-  return JSON.parse(configString) as Config
+  const parsedConfig = JSON.parse(configString) as Config
+
+  return {
+    baseDir: parsedConfig.baseDir || 'src/components',
+    ext: parsedConfig.ext || 'ts',
+  }
 }
