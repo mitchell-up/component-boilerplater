@@ -4,7 +4,7 @@ import { Config } from '../config/readConfig'
 import { getBoilerPlate } from './boilerplate'
 
 interface FileObj {
-  path: fs.PathOrFileDescriptor
+  path: string
   contents: string
 }
 
@@ -70,6 +70,10 @@ export function generateBoilerPlates(componentName: string, config: Config) {
 
   // Generate Files for the component
   files.forEach((file) => {
+    if (fs.existsSync(file.path)) {
+      const errorMessage = `There is already a file in ${file.path}.`
+      throw Error(errorMessage)
+    }
     fs.writeFileSync(file.path, file.contents)
   })
 
@@ -81,11 +85,9 @@ export function generateBoilerPlates(componentName: string, config: Config) {
 
   if (fs.existsSync(indexPath)) {
     const indexFile = fs.readFileSync(outputDir + `/index.${config.ext}`)
-
     fs.writeFileSync(indexPath, indexFile + indexContents + '\n')
   } else {
-    console.log(`💡 The index file for Components has been generated.`)
-
     fs.writeFileSync(indexPath, indexContents)
+    console.log(`💡 The index file for Components has been generated.`)
   }
 }

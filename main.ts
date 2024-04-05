@@ -1,5 +1,5 @@
 import { Command } from 'commander'
-import { generateBoilerPlate } from './src/generate/makeFile'
+import { generateBoilerPlates } from './src/generate/makeFile'
 import { readConfig } from './src/config/readConfig'
 
 const CONFIG_FILENAME = 'boilerplate.config.json'
@@ -11,7 +11,7 @@ program
   .action((componentName) => {
     const configs = readConfig(CONFIG_FILENAME)
 
-    generateBoilerPlate(componentName, configs)
+    generateBoilerPlates(componentName, configs)
   })
 
 program.parse(process.argv)
