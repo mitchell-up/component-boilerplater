@@ -59,6 +59,26 @@ function getFileContents(
   ]
 }
 
+function generateNewFile(file: FileObj) {
+  if (fs.existsSync(file.path)) {
+    const errorMessage = `There is already a file in ${file.path}.`
+    throw Error(errorMessage)
+  }
+  fs.writeFileSync(file.path, file.contents)
+}
+
+function generateIndexFile(path: string, contents: string) {
+  if (fs.existsSync(path)) {
+    const indexFile = fs.readFileSync(path)
+    const renewed = indexFile + contents + '\n'
+
+    return fs.writeFileSync(path, renewed)
+  }
+
+  fs.writeFileSync(path, contents)
+  console.log(`💡 The index file for Components has been generated.`)
+}
+
 export function generateBoilerPlates(componentName: string, config: Config) {
   const outputDir = makeOutputDir(config.baseDir)
 
@@ -70,24 +90,14 @@ export function generateBoilerPlates(componentName: string, config: Config) {
 
   // Generate Files for the component
   files.forEach((file) => {
-    if (fs.existsSync(file.path)) {
-      const errorMessage = `There is already a file in ${file.path}.`
-      throw Error(errorMessage)
-    }
-    fs.writeFileSync(file.path, file.contents)
+    generateNewFile(file)
   })
 
   console.log(`✅ All '${componentName}' boilerplates has been generated.`)
 
-  // Add Component into index.ts
+  // Add Component into index
   const indexPath = outputDir + `/index.${config.ext}`
   const indexContents = getBoilerPlate('index.txt', componentName, config.ext)
 
-  if (fs.existsSync(indexPath)) {
-    const indexFile = fs.readFileSync(outputDir + `/index.${config.ext}`)
-    fs.writeFileSync(indexPath, indexFile + indexContents + '\n')
-  } else {
-    fs.writeFileSync(indexPath, indexContents)
-    console.log(`💡 The index file for Components has been generated.`)
-  }
+  generateIndexFile(indexPath, indexContents)
 }
