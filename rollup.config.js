@@ -13,4 +13,10 @@ export default [
     },
     plugins: [commonjs(), resolve(), typescript()],
   },
+  {
+    input: 'bin/cli',
+    output: {
+      dir: 'dist/bin',
+    },
+  },
 ]

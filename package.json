@@ -4,17 +4,16 @@
     "description": "Generating component, test, stories, and index files automatically.",
     "main": "main.js",
     "scripts": {
-        "compile": "tsc --build && cp -r src/contents dist/src/contents",
-        "generate": "node dist/index.js",
-        "dev": "npm run compile && npm run generate",
-        "start": "node index",
-        "build": "npm run compile && cp package.json dist/package.json && cp -r bin dist/bin",
-        "pack": "cd ./dist && npm pack",
-        "gen": "component-boilerplater",
-        "roll": "rollup -c --bundleConfigAsCjs && cp -r src/contents dist/contents && cp -r bin dist/bin"
+        "dev": "npm run build && node dist/main.js",
+        "build": "rollup && npm run cp-contents",
+        "rollup": "rollup -c --bundleConfigAsCjs",
+        "cp-contents": "cp -r src/contents dist/contents"
     },
     "author": "",
     "license": "ISC",
+    "bin": {
+        "gencb": "./bin/cli"
+    },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
@@ -25,11 +24,5 @@
         "rollup": "^4.14.0",
         "tslib": "^2.6.2",
         "typescript": "^5.4.3"
-    },
-    "bin": {
-        "component-boilerplater": "./bin/gen"
-    },
-    "dependencies": {
-        "component-boilerplater": "file:component-boilerplater-1.0.0.tgz"
     }
 }
