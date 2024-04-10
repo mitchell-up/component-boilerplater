@@ -6,19 +6,23 @@ export interface Config {
   ext?: 'js' | 'ts'
 }
 
+const defaultConfig: Required<Config> = {
+  baseDir: 'src/components',
+  ext: 'ts',
+}
+
 function findConfigFile(fileName: string, rootDir = process.cwd()) {
   const filePath = path.join(rootDir, fileName)
 
-  if (!fs.existsSync(filePath)) {
-    const errorMessage = `Failed to find config file. You need to make "${fileName}" in your root directory.`
-    throw Error(errorMessage)
-  }
-
-  return filePath
+  return fs.existsSync(filePath) ? filePath : null
 }
 
 export function readConfig(fileName: string): Required<Config> {
   const configFile = findConfigFile(fileName)
+
+  if (!configFile) {
+    return defaultConfig
+  }
 
   const configString = fs.readFileSync(configFile, 'utf8')
 
