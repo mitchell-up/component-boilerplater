@@ -1,6 +1,6 @@
 import { Command } from 'commander'
-import { generateBoilerPlates } from './src/generate/makeFile'
 import { readConfig } from './src/config/readConfig'
+import { generateBoilerPlates } from './src/generate/generateBoilerPlates'
 
 const CONFIG_FILENAME = 'boilerplate.config.json'
 

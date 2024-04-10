@@ -1,5 +1,4 @@
 import fs from 'fs-extra'
-import path from 'path'
 import { Config } from '../config/readConfig'
 import { getBoilerPlate } from './boilerplate'
 
@@ -9,11 +8,6 @@ interface FileObj {
 }
 
 type FileContents = FileObj[]
-
-function makeOutputDir(basePath: string = '/') {
-  const cwd = process.cwd()
-  return path.join(cwd, basePath)
-}
 
 function makeFileObj(
   componentDir: string,
@@ -26,7 +20,7 @@ function makeFileObj(
   }
 }
 
-function getFileContents(
+export function getFileContents(
   dir: string,
   name: string,
   config: Config,
@@ -59,7 +53,7 @@ function getFileContents(
   ]
 }
 
-function generateNewFile(file: FileObj) {
+export function generateNewFile(file: FileObj) {
   if (fs.existsSync(file.path)) {
     const errorMessage = `There is already a file in ${file.path}.`
     throw Error(errorMessage)
@@ -67,7 +61,7 @@ function generateNewFile(file: FileObj) {
   fs.writeFileSync(file.path, file.contents)
 }
 
-function generateIndexFile(path: string, contents: string) {
+export function generateIndexFile(path: string, contents: string) {
   if (fs.existsSync(path)) {
     const indexFile = fs.readFileSync(path)
     const renewed = indexFile + contents + '\n'
@@ -77,27 +71,4 @@ function generateIndexFile(path: string, contents: string) {
 
   fs.writeFileSync(path, contents)
   console.log(`💡 The index file for Components has been generated.`)
-}
-
-export function generateBoilerPlates(componentName: string, config: Config) {
-  const outputDir = makeOutputDir(config.baseDir)
-
-  const componentDir = `${outputDir}/${componentName}`
-
-  fs.ensureDirSync(componentDir)
-
-  const files = getFileContents(componentDir, componentName, config)
-
-  // Generate Files for the component
-  files.forEach((file) => {
-    generateNewFile(file)
-  })
-
-  console.log(`✅ All '${componentName}' boilerplates has been generated.`)
-
-  // Add Component into index
-  const indexPath = outputDir + `/index.${config.ext}`
-  const indexContents = getBoilerPlate('index.txt', componentName, config.ext)
-
-  generateIndexFile(indexPath, indexContents)
 }
