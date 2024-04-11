@@ -1,6 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
 
 export default [
   {
@@ -11,7 +12,7 @@ export default [
       exports: 'named',
       sourcemap: true,
     },
-    plugins: [commonjs(), resolve(), typescript()],
+    plugins: [commonjs(), resolve(), typescript(), json()],
   },
   {
     input: 'bin/cli',

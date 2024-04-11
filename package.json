@@ -1,13 +1,14 @@
 {
     "name": "component-boilerplater",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "Generating component, test, stories, and index files automatically.",
     "main": "main.js",
     "scripts": {
         "dev": "npm run build && node dist/main.js",
-        "build": "rollup && npm run cp-contents",
+        "build": "npm run rollup && npm run cp-contents",
         "rollup": "rollup -c --bundleConfigAsCjs",
-        "cp-contents": "cp -r src/contents dist/contents"
+        "cp-contents": "cp -r src/contents dist/contents",
+        "gen": "node dist/main.js"
     },
     "author": "",
     "license": "ISC",
@@ -16,6 +17,7 @@
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-json": "^6.1.0",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-typescript": "^11.1.6",
         "@types/fs-extra": "^11.0.4",
