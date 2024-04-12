@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { existsSync, readFileSync, writeFileSync } from 'fs-extra'
 import { Config } from '../config/readConfig'
 import { getBoilerPlate } from './boilerplate'
 
@@ -54,21 +54,21 @@ export function getFileContents(
 }
 
 export function generateNewFile(file: FileObj) {
-  if (fs.existsSync(file.path)) {
+  if (existsSync(file.path)) {
     const errorMessage = `There is already a file in ${file.path}.`
     throw Error(errorMessage)
   }
-  fs.writeFileSync(file.path, file.contents)
+  writeFileSync(file.path, file.contents)
 }
 
 export function generateIndexFile(path: string, contents: string) {
-  if (fs.existsSync(path)) {
-    const indexFile = fs.readFileSync(path)
+  if (existsSync(path)) {
+    const indexFile = readFileSync(path)
     const renewed = indexFile + contents + '\n'
 
-    return fs.writeFileSync(path, renewed)
+    return writeFileSync(path, renewed)
   }
 
-  fs.writeFileSync(path, contents)
+  writeFileSync(path, contents)
   console.log(`💡 The index file for Components has been generated.`)
 }

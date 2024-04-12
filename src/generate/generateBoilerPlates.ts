@@ -1,8 +1,8 @@
-import fs from 'fs-extra'
 import path from 'path'
 import { Config } from '../config/readConfig'
 import { generateIndexFile, generateNewFile, getFileContents } from './makeFile'
 import { getBoilerPlate } from './boilerplate'
+import { ensureDirSync } from 'fs-extra'
 
 function makeOutputDir(basePath: string = '/') {
   const cwd = process.cwd()
@@ -14,7 +14,7 @@ export function generateBoilerPlates(componentName: string, config: Config) {
 
   const componentDir = `${outputDir}/${componentName}`
 
-  fs.ensureDirSync(componentDir)
+  ensureDirSync(componentDir)
 
   // Add Component into index
   const indexPath = outputDir + `/index.${config.ext}`

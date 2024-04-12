@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { existsSync, readFileSync } from 'fs-extra'
 import path from 'path'
 
 export interface Config {
@@ -14,7 +14,7 @@ const defaultConfig: Required<Config> = {
 function findConfigFile(fileName: string, rootDir = process.cwd()) {
   const filePath = path.join(rootDir, fileName)
 
-  return fs.existsSync(filePath) ? filePath : null
+  return existsSync(filePath) ? filePath : null
 }
 
 export function readConfig(fileName: string): Required<Config> {
@@ -24,7 +24,7 @@ export function readConfig(fileName: string): Required<Config> {
     return defaultConfig
   }
 
-  const configString = fs.readFileSync(configFile, 'utf8')
+  const configString = readFileSync(configFile, 'utf8')
 
   if (!configString) {
     throw Error(`Failed to read '${fileName}'`)
