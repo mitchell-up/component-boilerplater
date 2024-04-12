@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/mitchell-up/component-boilerplater/compare/v1.0.2...v1.0.3) (2024-04-12)
+
+
+### Bug Fixes
+
+* publish ([cc148ca](https://github.com/mitchell-up/component-boilerplater/commit/cc148cae676eab9bc8cca22e2870cac60a372491))
+
 ## [1.0.2](https://github.com/mitchell-up/component-boilerplater/compare/v1.0.1...v1.0.2) (2024-04-12)
 
 
