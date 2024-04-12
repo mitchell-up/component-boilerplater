@@ -8,7 +8,7 @@
         "build": "npm run rollup",
         "rollup": "rollup -c --bundleConfigAsCjs",
         "cp-contents": "cp -r src/contents dist/contents",
-        "gen": "node dist/main.js"
+        "gen": "gencb"
     },
     "author": "",
     "license": "ISC",
@@ -28,5 +28,9 @@
         "rollup-plugin-analyzer": "^4.0.0",
         "tslib": "^2.6.2",
         "typescript": "^5.4.3"
-    }
+    },
+    "files": [
+        "dist",
+        "bin"
+    ]
 }

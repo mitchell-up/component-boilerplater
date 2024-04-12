@@ -16,10 +16,4 @@ export default [
     },
     plugins: [commonjs(), resolve(), typescript(), json(), terser(), analyze()],
   },
-  {
-    input: 'bin/cli',
-    output: {
-      dir: 'dist/bin',
-    },
-  },
 ]
