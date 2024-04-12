@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "npm run build && node dist/main.js",
         "build": "npm run rollup",
-        "rollup": "rollup -c --bundleConfigAsCjs",
+        "rollup": "rollup -c --bundleConfigAsCjs && npm run cp-contents",
         "cp-contents": "cp -r src/contents dist/contents",
         "gen": "gencb"
     },
