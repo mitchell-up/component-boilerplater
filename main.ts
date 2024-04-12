@@ -29,3 +29,5 @@ program
 
     generateBoilerPlates(componentName, configs)
   })
+
+program.parse(process.argv)
