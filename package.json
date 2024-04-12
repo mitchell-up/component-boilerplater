@@ -2,10 +2,10 @@
     "name": "component-boilerplater",
     "version": "0.1.0",
     "description": "Generating component, test, stories, and index files automatically.",
-    "main": "main.js",
+    "main": "dist/main.js",
     "scripts": {
         "dev": "npm run build && node dist/main.js",
-        "build": "npm run rollup && npm run cp-contents",
+        "build": "npm run rollup",
         "rollup": "rollup -c --bundleConfigAsCjs",
         "cp-contents": "cp -r src/contents dist/contents",
         "gen": "node dist/main.js"
