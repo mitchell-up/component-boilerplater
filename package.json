@@ -1,6 +1,6 @@
 {
     "name": "component-boilerplater",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Generating component, test, stories, and index files automatically.",
     "main": "dist/main.js",
     "scripts": {
