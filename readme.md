@@ -13,12 +13,13 @@ Just one command, you can get Component, Test, Stories automatically.
 ## 🚀 Getting Started
 
 ### 01. Add Scripts
+
 ```js
 {
   //..
   "scripts": {
     //..
-    "gen": "component-boilerplater"
+    "gen": "gencb"
     //..
   }
   //..
@@ -26,6 +27,7 @@ Just one command, you can get Component, Test, Stories automatically.
 ```
 
 ### 02. Run Command with Component Name
+
 ```bash
 npm run gen <Component Name>
 ```
@@ -33,6 +35,7 @@ npm run gen <Component Name>
 <br/>
 
 ## Configurations
+
 Make `boilerplate.config.json` in your root directory.
 
 ```js
@@ -45,6 +48,7 @@ Make `boilerplate.config.json` in your root directory.
 <br/>
 
 ## What Can You Get?
+
 You only need to prepare a component name for files. If you named some component 'Text', you can get below files in Text folder:
 
 ```bash
@@ -113,5 +117,3 @@ export const TextDefault: Story = {
   name: 'Text',
 }
 ```
-
-
